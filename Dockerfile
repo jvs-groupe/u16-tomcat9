@@ -1,4 +1,4 @@
-# Version 1.0.0
+# Version 1.0.1
 
 FROM jvsgroupe/u16_core
 MAINTAINER Jérôme KLAM, "jerome.klam@jvs.fr"
@@ -34,12 +34,20 @@ COPY docker/tomcat-users.xml /opt/apache-tomcat9/conf/
 COPY docker/host-manager.xml /opt/apache-tomcat9/webapps/host-manager/META-INF/context.xml 
 COPY docker/manager.xml /opt/apache-tomcat9/webapps/manager/META-INF/context.xml 
 
+# Outils
+RUN apt-get update && apt-get install -y maven
+RUN mkdir -p /opt/java
+
 # startup
 ENV PATH $PATH:$CATALINA_HOME/bin
 RUN chmod +x /opt/apache-tomcat9/bin/startup.sh
 
 # Ports
 EXPOSE 8080
+
+# Volumes
+VOLUME /opt/apache-tomcat9/webapps
+VOLUME /opt/java
 
 # End
 CMD ["catalina.sh", "run"]
