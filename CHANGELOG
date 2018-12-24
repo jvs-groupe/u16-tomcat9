@@ -1,3 +1,7 @@
+# 1.0.2 : 24/12/2018
+
+* Volume repository for eclipse buildpath. Need M2_REPO variable
+
 # 1.0.1 : 22/06/2018
 
 * Maven

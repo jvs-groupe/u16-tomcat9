@@ -1,4 +1,4 @@
-# Version 1.0.1
+# Version 1.0.2
 
 FROM jvsgroupe/u16_core
 MAINTAINER Jérôme KLAM, "jerome.klam@jvs.fr"
@@ -37,6 +37,8 @@ COPY docker/manager.xml /opt/apache-tomcat9/webapps/manager/META-INF/context.xml
 # Outils
 RUN apt-get update && apt-get install -y maven
 RUN mkdir -p /opt/java
+RUN mkdir -p /root/.m2
+RUN mkdir -p /root/.m2/repository/
 
 # startup
 ENV PATH $PATH:$CATALINA_HOME/bin
@@ -48,6 +50,7 @@ EXPOSE 8080
 # Volumes
 VOLUME /opt/apache-tomcat9/webapps
 VOLUME /opt/java
+VOLUME /root/.m2/repository/
 
 # End
 CMD ["catalina.sh", "run"]
